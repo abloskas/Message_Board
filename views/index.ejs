@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Message Dashboard</title>
+</head>
+<body>
+    <% if(messages.errors) { %>
+        <% for (var x of messages.errors) { %>
+            <h3><%= x %></h3>
+        <% } %>
+    <% } %>
+    <h1>The Messageboard</h1>
+    <hr>
+    <br>
+    <h2>Post a Message:</h2>
+    <form action="/" method="POST">
+        Name: <input type="text" name="name">
+        Message: <input type="text" name="message">
+        <input type="submit" value="Submit">
+    </form>
+    <hr>
+    <% for (let message of messages) { %>
+        <h3><%= message.name %></a></h3>
+        <p><%= message.message%></p>
+        <h5>Replies:</h5>
+        <% for (let y of message.comments) { %>
+            <h5><%=y.name%>'s reply:</h5>
+            <p><%=y.comment%></p>
+            <% } %>  
+            
+    <form action="/comment/<%=message.id%>" method="POST">
+        Name: <input type="text" name="name">
+        Comment: <input type="text" name="comment">
+        <input type="submit" value="Submit">
+    </form>
+    <hr>  
+    <% } %>
+
+      
+</body>
+</html>
